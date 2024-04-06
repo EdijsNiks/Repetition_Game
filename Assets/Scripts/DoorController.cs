@@ -20,7 +20,7 @@ public class DoorController : MonoBehaviour
         {
             doorAnimator.Play("Door1Open", 0, 0.0f);
             doorOpen = true;
-            useText.SetText("Door1Open");
+           
         }
         else
         {
