@@ -8,14 +8,14 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: New Terrain Material
-  m_Shader: {fileID: -6465566751694194690, guid: 2b3b7d0b179748b449e12721ea4fcfa6,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 69c1f799e772cb6438f56c23efccb782, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 0
-  m_EnableInstancingVariants: 0
+  m_InvalidKeywords:
+  - _EMISSION
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -140,6 +140,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -157,9 +161,9 @@ Material:
     - Boolean_193028D2: 0
     - Boolean_3F1A8DAB: 0
     - Boolean_43476D73: 0
-    - Boolean_7165A49C: 1
-    - Boolean_85059BBE: 1
-    - Boolean_8BBF99CD: 1
+    - Boolean_7165A49C: 0
+    - Boolean_85059BBE: 0
+    - Boolean_8BBF99CD: 0
     - Boolean_D258FF8E: 1
     - Vector1_21C41D02: 256
     - Vector1_6F288C5B: 0.5
@@ -188,6 +192,7 @@ Material:
     - _DistortionStrengthScaled: 0.1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EmissionEnabled: 0
     - _EnableExternalAlpha: 0
     - _EnableHeightBlend: 0
     - _EnableInstancedPerPixelNormal: 1
@@ -196,9 +201,11 @@ Material:
     - _FlipbookMode: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
+    - _GlossinessSource: 0
     - _GlossyReflections: 0
     - _HeightTransition: 0
-    - _Metallic: 0
+    - _LightingEnabled: 1
+    - _Metallic: 1
     - _Metallic0: 0
     - _Metallic1: 0
     - _Metallic2: 0
@@ -211,7 +218,8 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SampleGI: 0
-    - _Smoothness: 0.5
+    - _Shininess: 0
+    - _Smoothness: 0.25
     - _Smoothness0: 1
     - _Smoothness1: 1
     - _Smoothness2: 1
@@ -221,6 +229,7 @@ Material:
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
     - _SoftParticlesNearFadeDistance: 0
+    - _SpecSource: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -231,11 +240,12 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - Color_2E5415DE: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 0}
-    - Vector2_8044833E: {r: 20, g: 20, b: 0, a: 0}
+    - Vector2_8044833E: {r: 30, g: 20, b: 0, a: 0}
     - _BaseColor: {r: 0.5254902, g: 0.52156866, b: 0.2784314, a: 1}
     - _BaseColorAddSubDiff: {r: -1, g: 1, b: 0, a: 0}
     - _CameraFadeParams: {r: 0, g: Infinity, b: 0, a: 0}
     - _Color: {r: 0.5254902, g: 0.5215686, b: 0.27843136, a: 1}
+    - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
