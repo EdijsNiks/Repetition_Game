@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DoorController : MonoBehaviour
 {
     private Animator doorAnimator;
     private bool doorOpen = false;
+    [SerializeField] TextMeshPro useText;
     private void Awake()
     {
         doorAnimator = gameObject.GetComponent<Animator>();
@@ -18,6 +20,7 @@ public class DoorController : MonoBehaviour
         {
             doorAnimator.Play("Door1Open", 0, 0.0f);
             doorOpen = true;
+            useText.SetText("Door1Open");
         }
         else
         {
