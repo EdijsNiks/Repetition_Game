@@ -203,7 +203,7 @@ public class FirstPersonController : MonoBehaviour
     private void Update()
     {
         #region Camera
-
+        if(!PauseMenu.Paused){
         // Control camera movement
         if (cameraCanMove)
         {
@@ -268,7 +268,7 @@ public class FirstPersonController : MonoBehaviour
                 playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, fov, zoomStepTime * Time.deltaTime);
             }
         }
-
+        }
         #endregion
         #endregion
 
