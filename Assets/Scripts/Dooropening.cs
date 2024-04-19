@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,10 +9,11 @@ public class Dooropening : MonoBehaviour
     [SerializeField] private string excludeLayerName = null;
 
     private DoorController rayCastedObj;
-
+    private NoteController _noteController;
     [SerializeField] private KeyCode openDoorKey = KeyCode.E;
 
     private const string interactableTag = "InteractiveObject";
+    private const string interactableNote = "InteractiveNote";
 
     private void Update()
     {
@@ -34,11 +35,43 @@ public class Dooropening : MonoBehaviour
                     }
                 }
             }
+            if (hit.collider.CompareTag(interactableNote))
+            {
+                var readableItem = hit.collider.gameObject.GetComponent<NoteController>();
+                if (readableItem != null)
+                {
+                    _noteController = readableItem;
+                }
+                else
+                {
+                    ClearNote();
+                }
+            }
+            else
+            {
+                ClearNote();
+            }
+            if (_noteController != null)
+            {
+                if (Input.GetKeyDown(openDoorKey))
+                {
+                    _noteController.ShowNote();
+                }
+            }
         }
+
+        void ClearNote()
+        {
+            if (_noteController != null)
+            {
+                _noteController = null;
+            }
+        }
+        
     }
 }
-*/
-using UnityEngine;
+
+/*using UnityEngine;
 using UnityEngine.UI;
 
 public class Dooropening : MonoBehaviour
@@ -68,7 +101,7 @@ public class Dooropening : MonoBehaviour
                 rayCastedObj = hit.collider.gameObject.GetComponent<DoorController>();
 
                 // Show the interaction indicator
-                interactionIndicator.SetActive(true);
+                //
 
                 // Position the indicator near the interactable object
                 Vector3 indicatorPosition = hit.collider.gameObject.transform.position;
@@ -94,4 +127,5 @@ public class Dooropening : MonoBehaviour
             interactionIndicator.SetActive(false);
         }
     }
-}
+  }
+}*/
