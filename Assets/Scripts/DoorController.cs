@@ -7,7 +7,6 @@ public class DoorController : MonoBehaviour
 {
     private Animator doorAnimator;
     private bool doorOpen = false;
-    [SerializeField] TextMeshPro useText;
     private void Awake()
     {
         doorAnimator = gameObject.GetComponent<Animator>();
