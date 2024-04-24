@@ -8,6 +8,9 @@ TagManager:
   - InteractiveNote
   - InteractiveKey
   - doorLocked
+  - InteractiveGun
+  - GunPlayer
+  - Car
   layers:
   - Default
   - TransparentFX
@@ -17,7 +20,7 @@ TagManager:
   - UI
   - Interact
   - Door1
-  - 
+  - Enemy
   - 
   - 
   - 
