@@ -11,6 +11,8 @@ public class EnterCar : MonoBehaviour
     private const string interactableTag = "Car";
 
     [SerializeField] private GameObject player;
+    [SerializeField] GameObject pickupText;
+
 
     private void Update()
     {
@@ -18,17 +20,16 @@ public class EnterCar : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-        if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
-        {
-          
-            if (hit.collider.CompareTag(interactableTag))
-            {
-                if (Input.GetKeyDown(openDoorKey))
-                {
-                    player.transform.position = new Vector3(411f,1.52f, 144f);;
-                }
-            }
+        // Check for raycast hit
+        bool isObjectInRaycast = Physics.Raycast(transform.position, fwd, out hit, rayLength, mask);
 
+        // Update text visibility based on raycast
+        pickupText.SetActive(isObjectInRaycast && hit.collider.CompareTag(interactableTag));
+
+        if (isObjectInRaycast && hit.collider.CompareTag(interactableTag) && Input.GetKeyDown(openDoorKey))
+        {
+            player.transform.position = new Vector3(411f, 1.52f, 144f); ;
+        }
     }
 }
-}
+

@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class GunPickup : MonoBehaviour
 {
+    [SerializeField] GameObject pickupText;
     [SerializeField] private int rayLength = 5;
     [SerializeField] private LayerMask layerMaskInteract;
     [SerializeField] private string excludeLayerName = null;
 
-    private DoorController rayCastedObj;
+    private DoorController rayCastedObj;  // Not used in this revision, can be removed
 
     [SerializeField] private KeyCode pickupGun = KeyCode.E;
     private const string interactableTag = "InteractiveGun";
 
-    [SerializeField] private GameObject playerGun;
-    [SerializeField] private GameObject fakeGun;
-
-
+    [SerializeField] GameObject playerGun;
+    [SerializeField] GameObject fakeGun;
 
     private void Update()
     {
@@ -24,17 +23,17 @@ public class GunPickup : MonoBehaviour
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
         int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
-        if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
+        // Check for raycast hit
+        bool isObjectInRaycast = Physics.Raycast(transform.position, fwd, out hit, rayLength, mask);
+
+        // Update text visibility based on raycast
+        pickupText.SetActive(isObjectInRaycast && hit.collider.CompareTag(interactableTag));
+
+        // Handle gun pickup logic (assuming object is in raycast)
+        if (isObjectInRaycast && hit.collider.CompareTag(interactableTag) && Input.GetKeyDown(pickupGun))
         {
-            // Door opening //
-            if (hit.collider.CompareTag(interactableTag))
-            {
-                if (Input.GetKeyDown(pickupGun))
-                {
-                    playerGun.SetActive(true);
-                    fakeGun.SetActive(false);
-                }
-            }
+            playerGun.SetActive(true);
+            fakeGun.SetActive(false);
         }
     }
 }
