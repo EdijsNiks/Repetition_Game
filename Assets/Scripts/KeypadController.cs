@@ -13,11 +13,9 @@ public class KeypadController : MonoBehaviour
     [SerializeField] private Text inputText; // Reference to the text displaying entered code
     
     [SerializeField] private string correctCode; // The actual code required to unlock something
-  //  [SerializeField] private AudioSource buttonSound; // Sound effect for button press
-  //  [SerializeField] private AudioSource correctSound; // Sound effect for correct code entry
-  //  [SerializeField] private AudioSource wrongSound; // Sound effect for wrong code entry
-  //  [SerializeField] private GameObject animateObject; // Object to animate on correct code entry (optional)
-  //  [SerializeField] private Animator animator; // Animator component for the animateObject (optional)
+        [SerializeField] private GameObject mainDoorTrigger; // Reference to the keypad UI GameObject
+
+
     private bool isOpen = false;
     public string pressedEnter;
 
@@ -47,6 +45,7 @@ public class KeypadController : MonoBehaviour
            // correctSound.Play();
             inputText.text = "Correct!";
             pressedEnter = "Open";
+            mainDoorTrigger.SetActive(true);
         }
         else
         {

@@ -28,7 +28,7 @@ public class EnterCar : MonoBehaviour
 
         if (isObjectInRaycast && hit.collider.CompareTag(interactableTag) && Input.GetKeyDown(openDoorKey))
         {
-            player.transform.position = new Vector3(411f, 1.52f, 144f); ;
+            player.transform.position = new Vector3(411f, 1.52f, 144f);
         }
     }
 }
