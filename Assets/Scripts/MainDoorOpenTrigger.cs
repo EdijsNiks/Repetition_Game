@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class MainDoorOpenTrigger : MonoBehaviour
 {
-    public GameObject door; // Reference to the door GameObject
-    private bool doorOpened = false; // Flag to track if door has already been opened
+    public GameObject door;                     // Reference to the door GameObject
+    public AudioSource doorOpenSound;           // Reference to the door opening sound effect
+    private bool doorOpened = false;            // Flag to track if door has already been opened
 
     private void OnTriggerEnter(Collider other)
     {
@@ -13,10 +14,21 @@ public class MainDoorOpenTrigger : MonoBehaviour
         {
             // Open the door by rotating it 90 degrees on the Y-axis
             door.transform.Rotate(Vector3.up * -90f);
-            doorOpened = true; // Mark door as opened
+
+            // Play the door opening sound effect
+            if (doorOpenSound != null)
+            {
+                doorOpenSound.Play();
+            }
+            else
+            {
+                Debug.LogWarning("MainDoorOpenTrigger: No door opening sound assigned!");
+            }
+
+            doorOpened = true;                // Mark door as opened
 
             // Destroy this GameObject after a short delay (optional)
-            Destroy(gameObject, 1.0f); // Destroy in 1 second
+            Destroy(gameObject, 1.0f);         // Destroy in 1 second
         }
     }
 }

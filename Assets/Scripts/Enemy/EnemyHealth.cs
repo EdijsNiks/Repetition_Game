@@ -23,6 +23,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        Destroy(gameObject);  // Destroy the enemy GameObject
+        gameObject.SetActive(false);  
     }
 }
