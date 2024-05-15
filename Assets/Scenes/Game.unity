@@ -1007,7 +1007,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 9c778abfc6f2099429026525d171cf75, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -4969,13 +4969,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 633263022}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.75069964, y: 0.005004376, z: 0.005610862, w: 0.6606009}
-  m_LocalPosition: {x: 261.36295, y: -0.06364381, z: 173.85211}
+  m_LocalRotation: {x: -0.005653946, y: -0.000863985, z: 0.0074685398, w: 0.9999558}
+  m_LocalPosition: {x: 261.36295, y: 1.0339155, z: 172.87526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -97.306, y: 0.81700134, z: 0.04499817}
+  m_LocalEulerAnglesHint: {x: -0.647, y: -0.104, z: 0.856}
 --- !u!114 &633263029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10695,6 +10695,7 @@ MonoBehaviour:
   pickupGun: 101
   playerGun: {fileID: 1343950412}
   fakeGun: {fileID: 7066561}
+  gunAttack: {fileID: 1287437904}
 --- !u!114 &1287437904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10702,7 +10703,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1287437892}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd97b60b2bc66de4f9311433ae52f4d8, type: 3}
   m_Name: 

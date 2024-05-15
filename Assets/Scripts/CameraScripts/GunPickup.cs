@@ -4,19 +4,31 @@ using UnityEngine;
 
 public class GunPickup : MonoBehaviour
 {
-    [SerializeField] GameObject pickupText;
+    [SerializeField] private GameObject pickupText;
     [SerializeField] private int rayLength = 5;
     [SerializeField] private LayerMask layerMaskInteract;
     [SerializeField] private GameObject enemyTrigger;
     [SerializeField] private string excludeLayerName = null;
 
-    private DoorController rayCastedObj;  // Not used in this revision, can be removed
-
     [SerializeField] private KeyCode pickupGun = KeyCode.E;
     private const string interactableTag = "InteractiveGun";
 
-    [SerializeField] GameObject playerGun;
-    [SerializeField] GameObject fakeGun;
+    [SerializeField] private GameObject playerGun;
+    [SerializeField] private GameObject fakeGun;
+    [SerializeField] private GunAttack gunAttack;  // Reference to the GunAttack script
+
+    private void Start()
+    {
+        // Ensure the GunAttack script is initially disabled
+        if (gunAttack != null)
+        {
+            gunAttack.enabled = false;
+        }
+        else
+        {
+            Debug.LogWarning("GunAttack script is not assigned in the Inspector.");
+        }
+    }
 
     private void Update()
     {
@@ -36,6 +48,12 @@ public class GunPickup : MonoBehaviour
             playerGun.SetActive(true);
             fakeGun.SetActive(false);
             enemyTrigger.SetActive(true);
+
+            // Enable the GunAttack script when the gun is picked up
+            if (gunAttack != null)
+            {
+                gunAttack.enabled = true;
+            }
         }
     }
 }
