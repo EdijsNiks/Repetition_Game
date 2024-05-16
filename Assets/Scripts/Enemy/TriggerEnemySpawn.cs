@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TriggerEnemySpawn : MonoBehaviour
 {
-    public GameObject enemy; // Reference to the script you want to activate
+    public GameObject enemy; // Reference to the enemy gameObject
 
     private void OnTriggerEnter(Collider other)
     {

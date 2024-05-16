@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.UI; // Import UI namespace for text handling
+using UnityEngine.UI; 
 using UnityEngine.SceneManagement; 
 
 public class EnterCar : MonoBehaviour
@@ -13,18 +13,16 @@ public class EnterCar : MonoBehaviour
     private const string interactableTag = "Car";
 
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject pickupText;  // Reference to existing pickup text
+   
     [SerializeField] private GameObject enemy;        // Reference to the enemy GameObject
     [SerializeField] private GameObject credits;
 
-    // Create a new GameObject for the teleportation text (avoid modifying existing pickupText)
     [SerializeField] private GameObject teleportText;
 
     private float timer = 0f;
 
     private void Start()
     {
-        // Ensure teleportText is initially inactive
         teleportText.SetActive(false);
     }
 
@@ -35,9 +33,6 @@ public class EnterCar : MonoBehaviour
         int mask = 1 << LayerMask.NameToLayer(excludeLayerName) | layerMaskInteract.value;
 
         bool isObjectInRaycast = Physics.Raycast(transform.position, fwd, out hit, rayLength, mask);
-
-        // Update pickup text visibility based on raycast
-        pickupText.SetActive(isObjectInRaycast && hit.collider.CompareTag(interactableTag));
 
         if (isObjectInRaycast && hit.collider.CompareTag(interactableTag) && Input.GetKeyDown(openDoorKey))
         {

@@ -27,8 +27,8 @@ public class MainDoorOpenTrigger : MonoBehaviour
 
             doorOpened = true;                // Mark door as opened
 
-            // Destroy this GameObject after a short delay (optional)
-            Destroy(gameObject, 1.0f);         // Destroy in 1 second
+            
+            Destroy(gameObject, 1.0f);      
         }
     }
 }

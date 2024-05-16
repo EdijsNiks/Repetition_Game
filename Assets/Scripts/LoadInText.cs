@@ -5,15 +5,15 @@ using System.Collections;
 
 public class WriteTextEffect : MonoBehaviour
 {
-    [SerializeField] private GameObject textfieldGameObject; // Reference to the text field GameObject
-    [SerializeField] private TMP_Text textfield; // Reference to the TMPro text field within the text field GameObject (optional)
+    [SerializeField] private GameObject textfieldGameObject; 
+    [SerializeField] private TMP_Text textfield; 
     [SerializeField] private string textToWrite; // The text to be written out
     [SerializeField] private float delayPerLetter = 0.1f; // Delay between writing each letter (seconds)
     [SerializeField] private float delayAfterText = 3.0f; // Delay before disabling the text field
 
     private IEnumerator WriteTextCoroutine;
 
-    void OnEnable() // Called when the script's GameObject becomes active
+    void OnEnable() 
     {
             textfieldGameObject.SetActive(true);
             if (textfieldGameObject != null)

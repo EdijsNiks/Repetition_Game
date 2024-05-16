@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int internalHealth;
 
     [SerializeField] private GameObject credits;
-    private float timer = -1f; // Use -1 to indicate that the timer is not active
+    private float timer = -1f; // Using -1 to indicate that the timer is not active
 
     void Update()
     {
@@ -17,7 +17,7 @@ public class PlayerHealth : MonoBehaviour
         {
             ResetHealth();
             credits.SetActive(true);
-            timer = 5f; // Start the timer for credits display
+            timer = 5f; 
         }
 
         // Decrement timer and deactivate credits after 5 seconds
@@ -27,7 +27,7 @@ public class PlayerHealth : MonoBehaviour
             if (timer <= 0f)
             {
                 credits.SetActive(false);
-                SceneManager.LoadScene(2); // Assuming scene index 2 is your game over scene
+                SceneManager.LoadScene(2); 
             }
         }
     }
@@ -41,4 +41,11 @@ public class PlayerHealth : MonoBehaviour
     {
         currentHealth = 10;
     }
+
+    // Reset currentHealth when the game starts
+    void Start()
+    {
+        ResetHealth();
+    }
 }
+

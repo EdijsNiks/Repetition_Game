@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GunPickup : MonoBehaviour
 {
-    [SerializeField] private GameObject pickupText;
+
     [SerializeField] private int rayLength = 5;
     [SerializeField] private LayerMask layerMaskInteract;
     [SerializeField] private GameObject enemyTrigger;
@@ -19,7 +19,6 @@ public class GunPickup : MonoBehaviour
 
     private void Start()
     {
-        // Ensure the GunAttack script is initially disabled
         if (gunAttack != null)
         {
             gunAttack.enabled = false;
@@ -39,10 +38,7 @@ public class GunPickup : MonoBehaviour
         // Check for raycast hit
         bool isObjectInRaycast = Physics.Raycast(transform.position, fwd, out hit, rayLength, mask);
 
-        // Update text visibility based on raycast
-        pickupText.SetActive(isObjectInRaycast && hit.collider.CompareTag(interactableTag));
 
-        // Handle gun pickup logic (assuming object is in raycast)
         if (isObjectInRaycast && hit.collider.CompareTag(interactableTag) && Input.GetKeyDown(pickupGun))
         {
             playerGun.SetActive(true);

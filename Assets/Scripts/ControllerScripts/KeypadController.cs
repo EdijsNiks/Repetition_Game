@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class KeypadController : MonoBehaviour
 {
     [SerializeField] private KeyCode openKey; // Key to open the keypad
-    [SerializeField] private KeyCode closeKey; // Key to open the keypad
+    [SerializeField] private KeyCode closeKey; // Key to close the keypad
 
     [SerializeField] private FirstPersonController player;
     [SerializeField] private GameObject keypadUI; // Reference to the keypad UI GameObject
@@ -77,7 +77,7 @@ public class KeypadController : MonoBehaviour
     {
         if (isOpen && Input.GetKeyDown(closeKey))
         {
-            OnExit(); // Close keypad with same key used to open
+            OnExit(); 
         }
     }
 }

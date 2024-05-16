@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-    private Animator animator; // Reference to the Animator component
+    private Animator animator; 
 
     void Awake()
     {
-        animator = GetComponent<Animator>(); // Get Animator on Awake for potential scene load animation
+        animator = GetComponent<Animator>(); 
     }
 
     void Start()

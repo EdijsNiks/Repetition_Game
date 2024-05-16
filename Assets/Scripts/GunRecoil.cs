@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class GunRecoil : MonoBehaviour
 {
-    public Transform gunTransform;  // The transform of the gun object
-    public float recoilAmount = 1.0f;  // The amount of recoil
-    public float recoilSpeed = 10.0f;  // The speed of the recoil effect
-    public float returnSpeed = 5.0f;  // The speed at which the gun returns to its original position
+    public Transform gunTransform;  
+    public float recoilAmount = 1.0f;  
+    public float recoilSpeed = 10.0f; 
+    public float returnSpeed = 5.0f;  
 
-    private Vector3 originalPosition;  // The original position of the gun
-    private Vector3 recoilPosition;  // The target position during recoil
-    private bool isRecoiling = false;  // Whether the gun is currently recoiling
-    private float recoilTimer = 0.0f;  // Timer to manage the recoil effect
+    private Vector3 originalPosition;  
+    private Vector3 recoilPosition;  
+    private bool isRecoiling = false;  
+    private float recoilTimer = 0.0f; 
 
     void Start()
     {

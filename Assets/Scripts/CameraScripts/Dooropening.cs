@@ -1,33 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Dooropening : MonoBehaviour
 {
     [SerializeField] private int rayLength = 5;
     [SerializeField] private LayerMask layerMaskInteract;
     [SerializeField] private string excludeLayerName = null;
+    [SerializeField] private KeyCode interactionKey = KeyCode.E;
+    [SerializeField] private Text interactionText;
 
-    private DoorController rayCastedObj;
-    private NoteController _noteController;
-    private KeypadController _keypadController;
-    [SerializeField] private KeyCode openDoorKey = KeyCode.E;
-    private GameObject door1; // Reference to the GameObject of door1
+    private DoorController rayCastedDoor;
+    private KeypadController rayCastedKeypad;
+    private NoteController rayCastedNote;
 
+    private bool isLookingAtDoor = false;
+    private bool isLookingAtKeypad = false;
+    private bool isLookingAtNote = false;
 
-    private const string interactableTag = "InteractiveObject";
-    private const string interactableNote = "InteractiveNote";
-    private const string interactableKey = "InteractiveKey";
-    private const string interactableDoorLocked = "doorLocked";
-    [SerializeField] private GameObject doorTag;
+    private const string doorTag = "InteractiveObject";
+    private const string keypadTag = "InteractiveKey";
+    private const string noteTag = "InteractiveNote";
 
-
-    private void Start(){
-        door1 = GameObject.FindGameObjectWithTag("doorLocked");
-        if (door1 != null){
-                    Debug.Log("This message will be printed to the Unity console when the game starts.");
-
-        }
+    private void Start()
+    {
+        interactionText.enabled = false; // Disable interaction text at start
     }
 
     private void Update()
@@ -38,72 +36,67 @@ public class Dooropening : MonoBehaviour
 
         if (Physics.Raycast(transform.position, fwd, out hit, rayLength, mask))
         {
-            // Door opening //
-            if (hit.collider.CompareTag(interactableTag))
+            if (hit.collider.CompareTag(doorTag))
             {
-                rayCastedObj = hit.collider.gameObject.GetComponent<DoorController>();
-
-                if (Input.GetKeyDown(openDoorKey))
-                {
-                    if (rayCastedObj != null)
-                    {
-                        rayCastedObj.PlayAnimation();
-                    }
-                }
-            }
-            // Note pickup //
-            if (hit.collider.CompareTag(interactableNote))
-            {
-                var readableItem = hit.collider.gameObject.GetComponent<NoteController>();
-                if (readableItem != null)
-                {
-                    _noteController = readableItem;
-                }
-                else
-                {
-                    ClearNote();
-                }
+                isLookingAtDoor = true;
+                rayCastedDoor = hit.collider.gameObject.GetComponent<DoorController>();
             }
             else
             {
-                ClearNote();
+                isLookingAtDoor = false;
             }
-            if (_noteController != null)
-            {
-                if (Input.GetKeyDown(openDoorKey))
-                {
-                    _noteController.ShowNote();
-                }
-            }
-            // Keypad unlocking //!SECTION
-            if (hit.collider.CompareTag(interactableKey))
-            {
-                _keypadController = hit.collider.gameObject.GetComponent<KeypadController>();
 
-                if (Input.GetKeyDown(openDoorKey))
-                {
-                    if (_keypadController != null)
-                    {
-                        _keypadController.OpenKeypad();
-
-                        if (_keypadController.pressedEnter == "Correct!")
-                        {
-                            door1.tag = interactableTag;
-                            Debug.Log("Tag of " + door1.tag + " changed to " + interactableTag);
-                        }
-                    }
-                }
+            if (hit.collider.CompareTag(keypadTag))
+            {
+                isLookingAtKeypad = true;
+                rayCastedKeypad = hit.collider.gameObject.GetComponent<KeypadController>();
             }
+            else
+            {
+                isLookingAtKeypad = false;
+            }
+
+            if (hit.collider.CompareTag(noteTag))
+            {
+                isLookingAtNote = true;
+                rayCastedNote = hit.collider.gameObject.GetComponent<NoteController>();
+            }
+            else
+            {
+                isLookingAtNote = false;
+            }
+
+            interactionText.enabled = true; // Enable interaction text when looking at an interactable object
+            interactionText.text = "Press 'E' to interact";
         }
-
-        void ClearNote()
+        else
         {
-            if (_noteController != null)
-            {
-                _noteController = null;
-            }
+            isLookingAtDoor = false;
+            isLookingAtKeypad = false;
+            isLookingAtNote = false;
+            interactionText.enabled = false; // Disable interaction text when not looking at an interactable object
         }
 
+        // Handle interactions based on what the player is looking at and if they press the interaction key
+        if (Input.GetKeyDown(interactionKey))
+        {
+            if (isLookingAtDoor && rayCastedDoor != null)
+            {
+                rayCastedDoor.PlayAnimation();
+            }
+
+            if (isLookingAtKeypad && rayCastedKeypad != null)
+            {
+                rayCastedKeypad.OpenKeypad();
+            }
+
+            if (isLookingAtNote && rayCastedNote != null)
+            {
+                rayCastedNote.ShowNote();
+            }
+        }
     }
 }
+
+
 

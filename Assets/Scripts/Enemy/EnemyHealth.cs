@@ -11,7 +11,7 @@ public class EnemyHealth : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)  // Function to handle enemy taking damage
+    public void TakeDamage(float damage)  
     {
         currentHealth -= damage;
 

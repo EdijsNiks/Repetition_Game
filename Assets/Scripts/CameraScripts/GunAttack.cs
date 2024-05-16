@@ -4,17 +4,17 @@ using System.Collections;
 
 public class GunAttack : MonoBehaviour
 {
-    [SerializeField] private Transform firePoint; // Transform for the firing position (e.g., gun barrel)
+    [SerializeField] private Transform firePoint; 
     [SerializeField] private float attackRange = 100f; // Maximum range of the attack
     [SerializeField] private LayerMask attackableLayers; // Layers considered valid targets
     [SerializeField] private float fireRate = 1.0f; // Shots per second
     [SerializeField] private AudioClip gunShotSound; // Gunshot sound
     [SerializeField] private int maxShots = 5; // Maximum number of shots
-    [SerializeField] private Vector3 recoilRotation = new Vector3(-10f, 0f, 0f); // Recoil rotation (only on X-axis)
+    [SerializeField] private Vector3 recoilRotation = new Vector3(-10f, 0f, 0f); // Recoil rotation
     [SerializeField] private float recoilDuration = 0.1f; // Duration of recoil effect
-    [SerializeField] private Text infoText; // Reference to the UI Text element
+    [SerializeField] private Text infoText; //  UI Text element
     [SerializeField] private string outOfAmmoMessage = "Out of ammo!"; // Message to display when out of ammo
-    [SerializeField] private string enemyKilledMessage = "Enemy killed!"; // Message to display when an enemy is killed
+    [SerializeField] private string enemyKilledMessage = ""; // Message to display when an enemy is killed
 
     private AudioSource audioSource; // Audio source component
     private float nextTimeToFire = 0f; // Time for next allowed shot
@@ -24,7 +24,6 @@ public class GunAttack : MonoBehaviour
 
     void Start()
     {
-        // Get the AudioSource component
         audioSource = GetComponent<AudioSource>();
         if (audioSource == null)
         {
@@ -37,7 +36,7 @@ public class GunAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1") && !isShooting && Time.time >= nextTimeToFire && shotsFired < maxShots) // Check for fire input, not shooting, fire rate cooldown, and shot limit
+        if (Input.GetButton("Fire1") && !isShooting && Time.time >= nextTimeToFire && shotsFired < maxShots) // Check fire input, not shooting, fire rate cooldown, and shot limit
         {
             nextTimeToFire = Time.time + 1f / fireRate; // Reset fire cooldown
             isShooting = true; // Mark as shooting
@@ -58,7 +57,7 @@ public class GunAttack : MonoBehaviour
         // Start the recoil effect coroutine
         StartCoroutine(HandleRecoil());
 
-        // Raycast after a short delay to simulate bullet travel time (optional)
+        // Raycast after a short delay to simulate bullet travel time
         StartCoroutine(PerformRaycastAfterDelay(0.1f));
 
         // Check if the player is out of ammo
@@ -90,7 +89,7 @@ public class GunAttack : MonoBehaviour
             yield return null;
         }
 
-        transform.localRotation = originalRotation; // Ensure the rotation is exactly the original
+        transform.localRotation = originalRotation; 
         isShooting = false; // Allow shooting again
     }
 
@@ -98,19 +97,17 @@ public class GunAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        // Draw a debug line to visualize the raycast
         Debug.DrawLine(firePoint.position, firePoint.position + firePoint.forward * attackRange, Color.red, 0.1f);
 
         RaycastHit hit;
         if (Physics.Raycast(firePoint.position, firePoint.forward, out hit, attackRange, attackableLayers))
         {
-            // Enemy hit! Deal damage and notify listeners
-            Debug.Log("Hit: " + hit.collider.name); // Output the name of the hit object for debugging
+            Debug.Log("Hit: " + hit.collider.name); 
             EnemyHealth enemyHealth = hit.collider.GetComponent<EnemyHealth>();
             if (enemyHealth != null)
             {
-                enemyHealth.TakeDamage(20); // Replace "20" with your actual damage value
-                ShowInfoText(enemyKilledMessage); // Show message when an enemy is killed
+                enemyHealth.TakeDamage(10); 
+                ShowInfoText(enemyKilledMessage);
             }
         }
     }
