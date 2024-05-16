@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,12 +8,12 @@ public class PlayerHealth : MonoBehaviour
     public int internalHealth;
 
     [SerializeField] private GameObject credits;
-    private float timer = 0f; // Added timer variable
+    private float timer = -1f; // Use -1 to indicate that the timer is not active
 
     void Update()
     {
         internalHealth = currentHealth;
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && timer == -1f) // Start timer only once
         {
             ResetHealth();
             credits.SetActive(true);
@@ -22,13 +21,12 @@ public class PlayerHealth : MonoBehaviour
         }
 
         // Decrement timer and deactivate credits after 5 seconds
-        if (credits.activeInHierarchy && timer > 0f)
+        if (timer > 0f)
         {
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
                 credits.SetActive(false);
-                // Load the game over scene here
                 SceneManager.LoadScene(2); // Assuming scene index 2 is your game over scene
             }
         }
